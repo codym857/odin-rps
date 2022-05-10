@@ -14,14 +14,28 @@ function playRound(playerSelection, computerSelection){
     const player = playerSelection.toLowerCase();
     const computer = computerSelection;
     if(player === computerSelection){
-        return 'Tie!';
-    }else if(player === 'null'){
-        return 'No Contest!'
+        printResults('Tie');
     }
     else if((player == 'rock' && computer == 'scissors') || 
     (player == 'paper' && computer == 'rock') || (player == 'scissors' && computer == 'paper')){
-        return player + ' wins!';
+        printResults(player + ' wins!');
     }else{
-        return computer + ' wins, you lose :(';
+        printResults(computer + ' wins, you lose :(');
     }
 }
+
+function printResults(results){
+    const resDiv = document.querySelector('#results');
+    const resP = document.createElement('p');
+    
+    resP.textContent = results;
+    resDiv.appendChild(resP);
+}
+
+const rockBtn = document.querySelector('#rock');
+const paperBtn = document.querySelector('#paper');
+const scissorsBtn = document.querySelector('#scissors');
+
+rockBtn.addEventListener('click', () => {playRound('rock', computerPlay());});
+paperBtn.addEventListener('click', () => {playRound('paper', computerPlay());});
+scissorsBtn.addEventListener('click', () => {playRound('scissors', computerPlay());});
